@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+        <title>电影详情</title>
+        <!-- 引入 FrozenUI -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/frozenui.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+        <style type="text/css">
+            .dy-img{
+                width:300px;
+            }
+        </style>
+    </head>
+<body>
+<section class="ui-container">
+    <div class="demo-block">
+        <section class="ui-panel ui-border-t">
+            <h4>影片详情：</h4>
+            <div class="ui-flex ui-flex-pack-center">
+                <div><img class="dy-img" th:src="${movie.img}"></div>
+            </div>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-t">
+                    <h5><span class="date">片名</span></h5>
+                    <h4 th:text="${movie.name}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">译名</span></h5>
+                    <h4 th:text="${movie.transName}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">年代</span></h5>
+                    <h4 th:text="${movie.age}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">产地</span></h5>
+                    <h4 th:text="${movie.productPlace}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">类别</span></h5>
+                    <h4 th:text="${movie.genre}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">语言</span></h5>
+                    <h4 th:text="${movie.lang}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">字幕</span></h5>
+                    <h4 th:text="${movie.captions}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">上映日期</span></h5>
+                    <h4 th:text="${movie.releaseDate}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">IMDb评分</span></h5>
+                    <h4 th:text="${movie.imdbScore}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">豆瓣评分</span></h5>
+                    <h4 th:text="${movie.doubanScore}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">片长</span></h5>
+                    <h4 th:text="${movie.lengthOfFilm}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">导演</span></h5>
+                    <h4 th:text="${movie.director}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">编剧</span></h5>
+                    <h4 th:text="${movie.writer}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">演员</span></h5>
+                    <h4 th:text="${movie.actor}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">简介</span></h5>
+                    <h4 th:text="${movie.introduction}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <h5><span class="date">下载次数</span></h5>
+                    <h4 th:text="${movie.downloadCount}"></h4>
+                </li>
+                <li class="ui-border-t">
+                    <div class="ui-btn-wrap">
+                        <a id="download" th:data-t_id="${movie.id}"
+                           th:onclick="addCount(this.getAttribute('data-t_id'))" class="ui-btn-lg" target="_blank"
+                           th:href="${movie.link}">
+                            下载
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+    </div>
+</section>
+<script type="text/javascript" th:src="@{/js/jquery-3.6.1.min.js}"></script>
+<script type="text/javascript">
+    function addCount(id){
+        $.ajax({
+            url:"/rest/download/add",
+            type:"POST",
+            data:{id:id},
+            dataType: "json",
+            success:function(result){
+                console.log(result);
+            },
+            error:function(err) {
+                console.log(err);
+            }
+        });
+    }
+</script>
+</body>
+</html>

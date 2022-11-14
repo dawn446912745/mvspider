@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+        <title>最新电影</title>
+        <!-- 引入 FrozenUI -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/frozenui.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    </head>
+<body>
+<section class="ui-container">
+    <section id="list">
+        <div class="demo-item">
+            <p class="demo-desc">电影列表</p>
+            <div class="demo-block">
+                <ul id="mvList" class="ui-list ui-list-single ui-list-link ui-border-tb" th:each="mv:${movieList}">
+                    <li class="ui-border-t" th:data-t_id="${mv.id}" th:onclick="showDetail(this.getAttribute('data-t_id'))">
+                        <div class="ui-list-info">
+                            <h4 class="ui-nowrap" th:text="${mv.transName} +'('+ ${mv.name} +')'">名字</h4>
+                            <div class="ui-txt-info" th:text="${mv.imdbScore} + '/' + ${mv.doubanScore}"> 6.4 </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</section>
+<script type="text/javascript" th:src="@{/js/jquery-3.6.1.min.js}"></script>
+<script type="text/javascript">
+    function showDetail(id){
+        window.location.href = "/detail?id=" + id;
+    }
+</script>
+</body>
+</html>
